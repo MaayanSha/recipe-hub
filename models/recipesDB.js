@@ -5,10 +5,10 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    ingredients: {
-        type: Array,
-        required: true,
-    },
+    ingredients:  [{
+        index : Number,
+        quantity : Number
+    }],
     steps: {
         type: String,
         required: true,
@@ -17,4 +17,4 @@ const recipeSchema = new mongoose.Schema({
 { timestamps: true }
 )
 
-module.exports = mongoose.model('Recipe', recipeSchema);
+module.exports = mongoose.model('Recipe', recipeSchema, "recipes");

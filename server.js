@@ -48,7 +48,7 @@ app.use("/recipes",express.static(path.join(__dirname,"/public")))
 
 app.use("/", require("./routes/homePage"))
 app.use("/recipes", require("./routes/api/recipes"))
-
+app.use("/login", require("./login/adminLogin"))
 
 //any routing that did not meet any other route
 app.all('*',(req,res)=>{
@@ -71,3 +71,4 @@ mongoose.connection.on('error', (err)=>{
     console.log(err);
     logEvents(`${err.no}: ${err.code}\t ${err.syscall}\t ${err.hostname}`, 'mongoErrorLog.log')
 })
+

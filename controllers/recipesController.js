@@ -5,17 +5,17 @@ const Recipe = require('../models/recipesDB')
 
 const getAllRecipes = asyncHandler(async(req, res)=>{
     const recipes = await Recipe.find().lean()
-    if (!recipes){
+    if (!recipes | recipes.length == 0){
         return res.status(400).json({message: 'no recipes here yet'})
     }
-    return res.json(recipes)
+    res.json(recipes)
     })
 
 const getRecipeById = asyncHandler(async(req,res)=>{
-    if (!req.params.id){
-        return res.status(400).json({message:'missing id in request'})
+    if (!req.params.item){
+        return res.status(400).json({message:'missing name in request'})
     }
-    const recipe = await Recipe.find({_id:req.params.id}).lean()
+    const recipe = await Recipe.find({item:req.params.item}).lean()
     if (!recipe){
         return res.status(400).json({message:'invalid id in request'})   
     }

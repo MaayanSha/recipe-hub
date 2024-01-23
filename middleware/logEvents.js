@@ -11,11 +11,11 @@ const logEvents = async (message) => {
     const logItem = `${dateTime}\t${uuidv4()}\t${message}\n`;
     console.log(logItem);
     try{
-        if (!fs.existsSync(path.join(__dirname,"middleware","logs"))){
-            await promiseFs.mkdir(path.join(__dirname,"middleware","logs"));
+        if (!fs.existsSync(path.join(__dirname,"logs"))){
+            await promiseFs.mkdir(path.join(__dirname,"logs"));
 
         }
-        await promiseFs.appendFile(path.join(__dirname,"middleware","logs","logs.txt"),logItem)
+        await promiseFs.appendFile(path.join(__dirname,"logs","logs.txt"),logItem)
     } catch (err){
         console.log(err);
     }
