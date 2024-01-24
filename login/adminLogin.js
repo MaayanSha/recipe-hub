@@ -2,17 +2,20 @@ const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 const User = require('../models/users')
+const bcrypt = require('bcrypt')
 
-const verifyUser = (username, password) =>{
-    const user = await User.find({username:username})
+const verifyUser = async(username, password) =>{
+    const user = await User.findOne({username:username})
     if (!user){
         return false
     }
-    return user.password == password;
+    const res = await bcrypt.compare(password, user.password)
+    return res;
 }
 
 router.route('/').post(async(req, res)=>{
-    if(!verifyUser(req.username, req.password)){
+    const isvalid = await verifyUser(req.body.username, req.body.password)
+    if(!isvalid){
         return res.sendStatus(403)
     }
     const username = req.body.username

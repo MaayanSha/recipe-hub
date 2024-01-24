@@ -49,6 +49,7 @@ app.use("/recipes",express.static(path.join(__dirname,"/public")))
 app.use("/", require("./routes/homePage"))
 app.use("/recipes", require("./routes/api/recipes"))
 app.use("/login", require("./login/adminLogin"))
+app.use("/signup", require("./login/adminSignUp"))
 
 //any routing that did not meet any other route
 app.all('*',(req,res)=>{
